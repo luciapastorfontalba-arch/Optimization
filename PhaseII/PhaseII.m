@@ -31,7 +31,7 @@ for i=1:size(sign_c,1)%constrains
 end
 
 %Get the estandar form
-for i=size(sign_f,1): -1:1%signo variable
+for i=size(sign_f,1): -1:1%sign variable
     if ~isequal(sign_f(i,:), [1 0])%x>= 0
         if isequal (sign_f(i,:),[0 1])% <=
         A(:,i)=-A(:,i)
@@ -60,8 +60,8 @@ z=0;
 iteration=0;
 
 m=size(A,1);
-basis=[m+1:size(A,2)];
-no_basis= [1:m];
+basis=[size(A,2)-m+1:size(A,2)];
+no_basis= [1:size(A,2)-m];
 
 names_inc = arrayfun(@(i) sprintf('x%d', i), 1:num_var, 'UniformOutput', false);
 num_slack = size(A, 2) - m;
@@ -167,6 +167,7 @@ mul= false; % in case we get multiple solution with 2 variables
             zs=1+zs;
         else
             zs=0;
+            bland=false;
         end
         z1=z;
        
